@@ -1,7 +1,7 @@
 ﻿
 
-export default function Login(){
+export default function Register(){
     return(<div className="w-screen h-screen grid place-items-center">
-        <div>登录</div>
+        <div>注册新账号</div>
     </div>);
 }

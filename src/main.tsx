@@ -13,7 +13,7 @@ export function ftn43iunoewt(){
         <StrictMode>
             <BrowserRouter basename="/frontend"><Routes>
                 <Route path="/" element={<MainPage />} />
-                <Route path="/app" element={<Six />} />
+                <Route path="/app" element={<Sixtesttesttestteststsetstsetse />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
             </Routes></BrowserRouter>
@@ -23,6 +23,6 @@ export function ftn43iunoewt(){
 
 ftn43iunoewt();
 
-function Six(){
+function Sixtesttesttestteststsetstsetse(){
     return(<div>sdqaw</div>);
 }

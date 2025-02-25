@@ -10,7 +10,7 @@ const root = createRoot(document.getElementById("root")!);
 export function load(){
     root.render(
         <StrictMode>
-            <BrowserRouter><Routes>
+            <BrowserRouter basename="/frontend"><Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/app" element={<Six />} />
                 <Route path="/login" element={<Login />} />

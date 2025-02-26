@@ -5,7 +5,11 @@ import zhCN from "antd/locale/zh_CN";
 
 export default function MainPage(){
     return(
-        <ConfigProvider locale={zhCN} wave={{disabled: true}} theme={{}}>
+        <ConfigProvider locale={zhCN} wave={{disabled: true}} theme={{
+            token: {
+                fontSize: 16
+            }
+        }}>
             <div className="flex flex-col flex-nowrap h-screen w-screen">
                 <Navbar />
                 <div className="grow">

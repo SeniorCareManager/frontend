@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+h1{
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+ol{
+    list-style-type: decimal;
+}
+
+.scrollbar666{
+    scrollbar-width: thin;
+}
+
+.ant-modal .ant-modal-content{
+    padding-right: 5px;
+}

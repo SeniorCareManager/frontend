@@ -1,22 +1,21 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { HashRouter, Route, Routes } from "react-router";
 import "./index.css";
 import MainPage from "./components/App.tsx";
-import Login from "./components/Login.tsx";
-import Register from "./components/Register.tsx";
+import LoginOrRegisterIGenerallyDontKnowHowToNameThisFreakingComponentWhichBothAppearsInLoginAndRegisterRoute from "./components/Login.tsx";
 
 const gr$$$$$$$$032wjre = createRoot(document.getElementById("root")!);
 
 export function ftn43iunoewt(){
     gr$$$$$$$$032wjre.render(
         <StrictMode>
-            <BrowserRouter basename="/frontend"><Routes>
+            <HashRouter><Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/app" element={<Sixtesttesttestteststsetstsetse />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-            </Routes></BrowserRouter>
+                <Route path="/login" element={<LoginOrRegisterIGenerallyDontKnowHowToNameThisFreakingComponentWhichBothAppearsInLoginAndRegisterRoute />} />
+                <Route path="/register" element={<LoginOrRegisterIGenerallyDontKnowHowToNameThisFreakingComponentWhichBothAppearsInLoginAndRegisterRoute />} />
+            </Routes></HashRouter>
         </StrictMode>
     );
 }

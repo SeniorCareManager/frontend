@@ -1,8 +1,9 @@
 ﻿import { message, Modal } from "antd"
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
+import { MessageContext } from "./App";
 
 export default function Popup(){
-    const [messageApi, contextHolder] = message.useMessage();
+    const { messageApi } = useContext(MessageContext);
     const [open, setOpen] = useState(false);
     const [copen, setCOPen] = useState(false);
     const agreecb = useCallback(()=>{
@@ -10,7 +11,7 @@ export default function Popup(){
     }, []);
     const denycb = useCallback(()=>{
         setOpen(false);
-        messageApi.error("您已拒绝合规声明与隐私条款", 5);
+        messageApi!.error("您已拒绝合规声明与隐私条款", 5);
     }, []);
     const denycb2 = useCallback(()=>{
         setCOPen(false);
@@ -18,11 +19,10 @@ export default function Popup(){
     const agreecb2 = useCallback(()=>{
         setCOPen(false);
         setOpen(false);
-        messageApi.success("您已接受合规声明与隐私条款");
+        messageApi!.success("您已接受合规声明与隐私条款");
     }, []);
     return(<>
-        {contextHolder}
-        <button onClick={()=>setOpen(true)}>打开协议</button>
+        <button onClick={()=>setOpen(true)} className="text-sm">调试：打开协议</button>
         <Modal open={copen} width={300} centered closeIcon={null} okText="确认" cancelText="取消" onOk={agreecb2} onCancel={denycb2} okButtonProps={{autoInsertSpace: false}} cancelButtonProps={{autoInsertSpace: false}}
         footer={(_: React.ReactNode, {OkBtn, CancelBtn})=>{
             return(<div className="flex flex-col items-center gap-2">

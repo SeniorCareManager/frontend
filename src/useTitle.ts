@@ -1,7 +1,7 @@
 ﻿import { useEffect } from "react";
 import { useLocation } from "react-router";
 
-const use49012740123748912748912 = (defaultTitle?: string)=>{
+const useTitle = ()=>{
     useLocation();
     useEffect(()=>{
         const hash423q = location.hash;
@@ -20,7 +20,7 @@ const use49012740123748912748912 = (defaultTitle?: string)=>{
                 break;
         }
         document.title = title;
-    }, [location, defaultTitle]);
+    }, [location]);
 };
 
-export default use49012740123748912748912;
+export default useTitle;

@@ -1,36 +1,109 @@
-﻿import { useNavigate } from "react-router";
-import use49012740123748912748912 from "../drfgbwefef";
-import { Icon } from "@iconify/react/dist/iconify.js";
+﻿import { useEffect, useRef, useState } from "react";
+import { LoginForm, ProFormCheckbox, ProFormInstance, ProFormText } from "@ant-design/pro-components";
+import { LockOutlined, MobileOutlined } from "@ant-design/icons";
+import { Button, ConfigProvider, message } from "antd";
+import localforage from "localforage";
+import { login, LoginFormData, LoginResponse } from "../schema/login";
+import meta from "../meta";
 
+type Props = {
+    //succeedCallBack :(responseData :LoginResponse)=>void;
+};
 
-export default function LoginOrRegisterIGenerallyDontKnowHowToNameThisFreakingComponentWhichBothAppearsInLoginAndRegisterRoute(){
-    const jfewag = useNavigate();
-    use49012740123748912748912();
-    console.log(location.hash);
-    return(<div className="w-screen h-screen grid place-items-center">
-        <div className="w-96 h-xl shadow-xl rounded-xl p-6 flex flex-col">
-            <div className="text-neutral-400"></div>
-            <div className="text-2xl text-center mb-8">银龄财富规划平台</div>
-            <div className="flex flex-row gap-3 mb-12 justify-center">
-                <button onClick={()=>jfewag("/login")} style={{
-                    color: location.hash === "#/login" ? "black" : "var(--color-neutral-400)",
-                    cursor: location.hash === "#/login" ? "" : "pointer"
-                }}>登录</button>
-                <div className="border-l-2 border-l-neutral-200 h-8 w-1"></div>
-                <button onClick={()=>jfewag("/register")} style={{
-                    color: location.hash === "#/register" ? "black" : "var(--color-neutral-400)",
-                    cursor: location.hash === "#/register" ? "" : "pointer"
-                }}>注册</button>
+/**@once */
+export default function Login(props :Props){
+    const
+        ref = useRef<ProFormInstance<LoginFormData> | undefined>(null),
+        [loading, setLoading] = useState(false),
+        [messageAPI, contextHolder] = message.useMessage(),
+        finish = (values :LoginFormData)=>{
+            setLoading(true);
+            login(values.username, values.password).catch((reason :any)=>{
+                messageAPI.open({
+                    type: "error",
+                    content: "请求失败"
+                });
+                setLoading(false);
+            }).then(async (value :Response | void)=>{
+                if(value){
+                    const response :LoginResponse = await value.json();
+                    if(response.success){
+                        //props.succeedCallBack(response);
+                        if(values.remember){
+                            localforage.setItem("username", values.username);
+                            localforage.setItem("password", values.password);
+                        }
+                        else{
+                            localforage.removeItem("username");
+                            localforage.removeItem("password");
+                        }
+                    }
+                    else messageAPI.open({
+                        type: "error",
+                        content: response.message
+                    });
+                }
+                setLoading(false);
+            });
+        };
+    useEffect(()=>{
+        (async ()=>{
+            const
+                username = await localforage.getItem<string>("username"),
+                password = await localforage.getItem<string>("password");
+            if(username && password){
+                ref.current?.setFieldValue("username", username);
+                ref.current?.setFieldValue("password", password);
+                ref.current?.setFieldValue("remember", true);
+            }
+        })();
+    });
+    return(<>
+        {contextHolder}
+        <ConfigProvider theme={{token: {fontSize: 14}}}>
+            <div className="flex grow flex-row justify-evenly">
+                <div>asd</div>
+                <LoginForm
+                    size="small"
+                    formRef={ref} onFinish={finish}
+                    title={<h2>用户登录</h2>}
+                    submitter={{
+                        submitButtonProps: {
+                            loading
+                        }
+                    }}
+                >
+                    <div className="size-full mb-8"></div>
+                    <ProFormText placeholder={'手机号'}
+                    rules={[
+                        {
+                          required: true,
+                          message: '请输入手机号！',
+                        },
+                        {
+                          pattern: /^1\d{10}$/,
+                          message: '手机号格式错误！'
+                        }
+                    ]}
+                    name="username" fieldProps={{
+                        size: "large",
+                        prefix: <MobileOutlined />
+                    }} />
+                    <div className="size-full mb-8"></div>
+                    <ProFormText.Password rules={[{required: true, message: "请输入密码！"}]} name="password" placeholder="密码" fieldProps={{
+                        size: "large",
+                        prefix: <LockOutlined />
+                    }} />
+                    <div className="flex flex-row gap-12 mb-1 select-none">
+                        <ProFormCheckbox name="remember" valuePropName="checked">记住密码</ProFormCheckbox>
+                        <ProFormCheckbox name="agree" valuePropName="checked">我已阅读并同意 用户协议</ProFormCheckbox>
+                    </div>
+                    <div className="flex flex-row justify-between mb-2">
+                        <button className="cursor-pointer">忘记密码？</button>
+                        <div>还没有账号？<button className="cursor-pointer text-blue-500">立即注册</button></div>
+                    </div>
+                </LoginForm>
             </div>
-            <div className="flex flex-col flex-nowrap">
-                <label className="text-sm mb-1">用户名</label>
-                <input type="text" className="outline-none border-b-2 py-0.5 border-b-neutral-400 focus:border-b-rose-500 mb-8" />
-                <label className="text-sm mb-1">密码</label>
-                <input type="password" className="outline-none border-b-2 py-0.5 border-b-neutral-400 focus:border-b-rose-500 mb-4" />
-            </div>
-        </div>
-        <div className="absolute top-0 right-0">
-            <button className="cursor-pointer" onClick={()=>jfewag("/")}><Icon icon="material-symbols:close" width="48" height="48" /></button>
-        </div>
-    </div>);
+        </ConfigProvider>
+    </>);
 }

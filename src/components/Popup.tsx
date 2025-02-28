@@ -1,7 +1,5 @@
 ﻿import { message, Modal } from "antd"
 import { useCallback, useState } from "react";
-import { getPx } from "../utils";
-
 
 export default function Popup(){
     const [messageApi, contextHolder] = message.useMessage();
@@ -12,11 +10,12 @@ export default function Popup(){
     }, []);
     const denycb = useCallback(()=>{
         setOpen(false);
+        messageApi.error("您已拒绝合规声明与隐私条款", 5);
     }, []);
     const denycb2 = useCallback(()=>{
         setCOPen(false);
     }, []);
-    const ahreecb2 = useCallback(()=>{
+    const agreecb2 = useCallback(()=>{
         setCOPen(false);
         setOpen(false);
         messageApi.success("您已接受合规声明与隐私条款");
@@ -24,7 +23,7 @@ export default function Popup(){
     return(<>
         {contextHolder}
         <button onClick={()=>setOpen(true)}>打开协议</button>
-        <Modal open={copen} width={300} centered closeIcon={null} okText="确认" cancelText="取消" onOk={ahreecb2} onCancel={denycb2} okButtonProps={{autoInsertSpace: false}} cancelButtonProps={{autoInsertSpace: false}}
+        <Modal open={copen} width={300} centered closeIcon={null} okText="确认" cancelText="取消" onOk={agreecb2} onCancel={denycb2} okButtonProps={{autoInsertSpace: false}} cancelButtonProps={{autoInsertSpace: false}}
         footer={(_: React.ReactNode, {OkBtn, CancelBtn})=>{
             return(<div className="flex flex-col items-center gap-2">
                 <div className="flex flex-row justify-center gap-4">
@@ -38,7 +37,7 @@ export default function Popup(){
         <Modal classNames={{
             content: "h-192 overflow-y-auto scrollbar666",
             mask: "backdrop-blur-sm"
-        }} width={900} okText="同意" cancelText="不同意"
+        }} width={900} closable={false} maskClosable={false} okText="同意" cancelText="不同意"
         footer={(_: React.ReactNode, {OkBtn, CancelBtn})=>{
             return(<div className="flex flex-col items-center gap-2">
                 <div className="text-sm text-neutral-600">点击“同意”即视为接受本声明全部内容，并承诺遵守平台规则及法律法规。</div>
@@ -48,7 +47,6 @@ export default function Popup(){
                 </div>
             </div>);
         }}
-        closeIcon={null}
         onOk={agreecb}
         onCancel={denycb}
         okButtonProps={{autoInsertSpace: false}} open={open}>

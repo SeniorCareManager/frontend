@@ -1,12 +1,28 @@
 @import "tailwindcss";
 
-h1{
-    font-size: xx-large;
-    font-weight: bold;
+#root{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-flow: column nowrap;
+    overflow: auto;
+    min-width: 900px;
 }
 
-ol{
-    list-style-type: decimal;
+@layer base{
+    h1{
+        font-size: xx-large;
+        font-weight: bold;
+    }
+    
+    h2{
+        font-size: x-large;
+        font-weight: bold;
+    }
+    
+    ol{
+        list-style-type: decimal;
+    }
 }
 
 .scrollbar666{
@@ -15,4 +31,12 @@ ol{
 
 .ant-modal .ant-modal-content{
     padding-right: 5px;
+}
+
+.ant-pro-form-login-top, .ant-pro-form-login-main{
+    width: 500px;
+}
+
+.active *{
+    border-bottom-color: var(--color-red-800);
 }

@@ -5,8 +5,9 @@
     width: 100vw;
     display: flex;
     flex-flow: column nowrap;
-    overflow: auto;
-    min-width: 900px;
+    overflow-x: auto;
+    overflow-y: clip;
+    min-width: 950px;
 }
 
 @layer base{
@@ -42,6 +43,10 @@
     width: 500px;
 }
 
-.active *{
+.active > div{
     border-bottom-color: var(--color-red-800);
+}
+
+.ant-btn-color-primary{
+    box-shadow: none;
 }

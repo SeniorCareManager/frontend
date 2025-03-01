@@ -1,6 +1,7 @@
 ﻿import { Button, Form, Input, Tooltip } from "antd";
 import { MobileOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import background from "../../assets/general3.png";
 
 type FieldType = {
     phone :string;
@@ -10,7 +11,12 @@ type FieldType = {
 export default function ResetPassword(){
     const [getVer, setGetVer] = useState(-1);
 
-    return(<div className="grow flex flex-row justify-center">
+    return(<div className="grow flex flex-row justify-center" style={{
+        backgroundSize: "100% 100%",
+        backgroundPosition: "left top",
+        backgroundRepeat: "no-repeat",
+        backgroundImage: `url(${background})`
+    }}>
         <div className="flex flex-col justify-center w-96 mb-48">
             <h1 className="text-center mb-8">重置密码</h1>
             <Form>

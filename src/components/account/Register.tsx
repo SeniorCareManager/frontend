@@ -7,7 +7,7 @@ import Terms from "../Terms";
 import meta from "../../meta";
 import { useForm } from "antd/es/form/Form";
 import { GetVerResponse, RegisterResponse } from "../../schema/register";
-import localforage from "localforage";
+import background from "../../assets/user_bg.png";
 
 type RegisterFormData = {
     phone :string;
@@ -122,8 +122,17 @@ export default function Register(){
                 </div>
             </div>);
         }}><Terms /></Modal>
-        <ConfigProvider theme={{token: {fontSize: 14}}}><div className="flex grow flex-row justify-around">
-            <div>左主图</div>
+        <ConfigProvider theme={{token: {
+            fontSize: 14,
+            colorBorder: "#a29881",
+            colorBgBase: "#e0b557"
+        }}}><div className="flex grow flex-row justify-around" style={{
+            backgroundSize: "100%",
+            backgroundPosition: "left top",
+            backgroundRepeat: "no-repeat",
+            backgroundImage: `url(${background})`
+        }}>
+            <div></div>
             <div className="flex flex-col justify-center"><div className="pb-32"><Form<RegisterFormData> form={form} onFinish={finish}>
                 <h1>欢迎加入银龄财富规划</h1>
                 <div className="size-full mb-8"></div>
@@ -171,7 +180,7 @@ export default function Register(){
                     </Checkbox></button>
                 </Form.Item>
                 <div className="mb-2">已有账号？<Link to={routes.login} className="text-blue-500">登录</Link></div>
-                <Button htmlType="submit" type="primary" className="w-full" size="large" >注册账户</Button>
+                <Button htmlType="submit" type="primary" className="w-full !bg-[#e49939] hover:!bg-[#f79513] active:!bg-[#e3ad4b] !text-black" size="large">注册账户</Button>
             </Form></div></div>
         </div></ConfigProvider>
     </>);

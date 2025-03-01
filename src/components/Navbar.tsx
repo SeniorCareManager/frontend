@@ -5,7 +5,7 @@ import { useContext } from "react";
 
 export default function Navbar(){
     const { loggedIn } = useContext(LoginStatusContext);
-    return(<div className="flex flex-row justify-center bg-[#f9e1aa] border-rose-600 border-b-2 h-16 select-none px-4">
+    return(<div className="flex flex-row justify-center bg-[#f9e1aa] border-rose-600 border-b-2 h-16 select-none px-4 sticky">
         <div className="flex flex-row max-w-5xl w-5xl justify-around">
             <Link to="/" className="flex flex-row flex-nowrap justify-center items-center flex-none m-2" style={{clipPath: "margin-box"}}>
                 <img alt="银龄财富规划 Logo" src={blackLogo} width={90} className="outline-none mr-[-10px]" />

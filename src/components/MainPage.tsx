@@ -1,15 +1,15 @@
-﻿import background from "../assets/background.jpg";
+﻿import background from "../assets/mp_bg.jpg";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function MainPage(){
     return(<div className="flex flex-col grow">
-        <div className="flex flex-row p-8 h-170 relative before:content-[''] before:absolute before:top-0 before:left-0 before:h-170 before:w-full before:backdrop-blur-[4px]" style={{
+        <div className="flex flex-row p-4 h-166 relative before:content-[''] before:absolute before:top-0 before:left-0 before:h-166 before:w-full before:backdrop-blur-[4px]" style={{
             backgroundSize: "50.1% 100%, 50% auto",
             backgroundPosition: "left top, right 80%",
             backgroundRepeat: "no-repeat, no-repeat",
             backgroundImage: `linear-gradient(to right, #f7f7f7, #fbbd36), url(${background})`
         }}>
-            <div className="text-center m-8 ml-16 p-4 z-1 rounded-sm">
+            <div className="text-center m-4 py-4 z-1 rounded-sm">
                 <h1 className="pb-8 text-[4rem] w-[9ic]">遇见银龄　智启未来</h1>
                 <div style={{fontSize: "2rem"}} className="mb-16">前瞻性一站式养老咨询与规划</div>
                 <div className="flex flex-row justify-center gap-16 mb-8">

@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { HashRouter, Navigate, Route, Routes } from "react-router";
 import { MessageInstance } from "antd/es/message/interface";
 import useMessage from "antd/es/message/useMessage";
@@ -17,6 +17,7 @@ import Plan from "./Plan";
 import ResetPassword from "./account/ResetPassword";
 import Profile from "./profile/Profile";
 import localforage from "localforage";
+import { whoami } from "../schema/login";
 
 export const routes = {
     main: "/",
@@ -37,6 +38,7 @@ export const routes = {
 } as const;
 
 const t = {
+    initialzing: true,
     loggedIn: false,
     accessToken: "",
     setLogin: null as unknown as (loggedIn? :boolean, accessToken? :string)=>void | null
@@ -51,6 +53,7 @@ export default function App(){
     const [messageApi, contextHolder] = useMessage({top: 64});
     const [loggedIn, setLoggedIn] = useState(false);
     const [at, setAT] = useState("");
+    const [initialzing, setInitialzing] = useState(true);
     const setLogin = useCallback((loggedIn? :boolean, accessToken? :string)=>{
         if(loggedIn !== undefined) setLoggedIn(loggedIn);
         if(accessToken !== undefined){
@@ -58,26 +61,35 @@ export default function App(){
             localforage.setItem("access_token", accessToken);
         }
     }, []);
-    return(<LoginStatusContext.Provider value={{loggedIn, accessToken: at, setLogin}}>
+    useEffect(()=>{(async()=>{
+        if(await whoami() !== null){
+            setAT((await localforage.getItem("access_token"))!);
+            setLoggedIn(true);
+        }
+        else localforage.setItem("access_token", null);
+        setInitialzing(false);
+    })()}, []);
+    return(<LoginStatusContext.Provider value={{loggedIn, accessToken: at, setLogin, initialzing}}>
         <MessageContext.Provider value={{messageApi}}>
             <ConfigProvider locale={zhCN} wave={{disabled: true}} theme={{token: {fontSize: 16}}}>
                 {contextHolder}
                 <HashRouter>
                     <Navbar />
-                    <Routes>
+                    <div className="overflow-y-auto grow flex flex-col"><Routes>
                         <Route path={routes.main} index element={<MainPage />} />
                         <Route path={routes.plan} element={<Plan />} />
                         <Route path={routes.news} element={<News />} />
                         <Route path={routes.forum} element={<Forum />} />
                         <Route path={routes.pricing} element={<Pricing />} />
                         <Route path={routes.feedback} element={<Feedback />} />
+
                         <Route path={routes.login} element={<Login />} />
                         <Route path={routes.register} element={<Register />} />
                         <Route path={routes.reset} element={<ResetPassword />} />
                         <Route path={routes.profile} element={<Profile />} />
 
                         <Route path="*" element={<Navigate to="/" replace />} />
-                    </Routes>
+                    </Routes></div>
                 </HashRouter>
             </ConfigProvider>
         </MessageContext.Provider>

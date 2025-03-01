@@ -1,12 +1,13 @@
 ﻿import { useContext, useEffect, useRef, useState } from "react";
 import { LoginForm, ProFormCheckbox, ProFormInstance, ProFormText } from "@ant-design/pro-components";
 import { LockOutlined, MobileOutlined } from "@ant-design/icons";
-import { ConfigProvider, Modal } from "antd";
+import { ConfigProvider, Modal, theme } from "antd";
 import localforage from "localforage";
 import { login, LoginFormData, LoginResponse } from "../../schema/login";
 import { LoginStatusContext, MessageContext, routes } from "../App";
 import { Link, useNavigate } from "react-router";
 import Terms from "../Terms";
+import background from "../../assets/user_bg.png";
 
 /**@once */
 export default function Login(){
@@ -62,12 +63,22 @@ export default function Login(){
             mask: "backdrop-blur-sm"
         }}
         footer={null}><Terms /></Modal>
-        <ConfigProvider theme={{token: {fontSize: 14}}}><div className="flex grow flex-row justify-around">
-            <div>左主图</div>
+        <ConfigProvider theme={{token: {
+            fontSize: 14,
+            colorBgBase: "#e0b557",
+            colorBorder: "#a29881",
+            colorPrimary: "#e4a93d"
+        }}}><div className="flex grow flex-row justify-around" style={{
+            backgroundSize: "100%",
+            backgroundPosition: "left top",
+            backgroundRepeat: "no-repeat",
+            backgroundImage: `url(${background})`
+        }}>
+            <div></div>
             <div className="flex flex-col justify-center"><div className="pb-32"><LoginForm
                 formRef={ref} onFinish={finish}
                 title={<h1>用户登录</h1>}
-                submitter={{submitButtonProps: {loading: loading, autoInsertSpace: false}}}
+                submitter={{submitButtonProps: {loading: loading, autoInsertSpace: false, className: "!bg-[#e49939] hover:!bg-[#f79513] active:!bg-[#e3ad4b]"}}}
             >
                 <div className="size-full mb-8"></div>
                 <ProFormText validateTrigger="onBlur" placeholder="手机号" name="phone"

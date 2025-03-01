@@ -1,6 +1,4 @@
-﻿import { ConfigProvider } from "antd";
-import zhCN from "antd/locale/zh_CN";
-import { useLoginNav } from "../hooks/useLogin";
+﻿import { useLoginNav } from "../hooks/useLogin";
 
 
 export default function Plan(){

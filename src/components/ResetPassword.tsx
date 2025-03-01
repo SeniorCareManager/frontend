@@ -1,5 +1,5 @@
 ﻿import { Button, Form, Input, Tooltip } from "antd";
-import { EllipsisOutlined, MobileOutlined } from "@ant-design/icons";
+import { MobileOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
 type FieldType = {
@@ -42,6 +42,6 @@ export default function ResetPassword(){
 function SetNewPassword(){
 
     return(<div>
-        
+
     </div>);
 }

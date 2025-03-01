@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router";
 import { LoginStatusContext, MessageContext, routes } from "../components/App";
 
-export function useLoginA(){
+export function useLoginNav(){
     const { messageApi } = useContext(MessageContext);
     const { loggedIn, accessToken } = useContext(LoginStatusContext);
     const nav = useNavigate();

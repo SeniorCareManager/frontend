@@ -1,11 +1,12 @@
-﻿import { useContext, useEffect, useRef, useState } from "react";
+﻿import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { LoginForm, ProFormCheckbox, ProFormInstance, ProFormText } from "@ant-design/pro-components";
 import { LockOutlined, MobileOutlined } from "@ant-design/icons";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, Modal } from "antd";
 import localforage from "localforage";
 import { login, LoginFormData, LoginResponse } from "../schema/login";
 import { MessageContext, routes } from "./App";
 import { useNavigate } from "react-router";
+import 合规声明 from "./合规声明";
 
 type Props = {
     //succeedCallBack :(responseData :LoginResponse)=>void;
@@ -48,6 +49,23 @@ export default function Login(props :Props){
                 setLoading(false);
             });
         };
+    const [open, setOpen] = useState(false);
+    const [copen, setCOPen] = useState(false);
+    const agreecb = useCallback(()=>{
+        setCOPen(true);
+    }, []);
+    const denycb = useCallback(()=>{
+        setOpen(false);
+        messageApi!.error("您已拒绝合规声明与隐私条款", 5);
+    }, []);
+    const denycb2 = useCallback(()=>{
+        setCOPen(false);
+    }, []);
+    const agreecb2 = useCallback(()=>{
+        setCOPen(false);
+        setOpen(false);
+        messageApi!.success("您已接受合规声明与隐私条款");
+    }, []);
     useEffect(()=>{
         (async ()=>{
             const
@@ -60,13 +78,35 @@ export default function Login(props :Props){
             }
         })();
     });
-    return(<ConfigProvider theme={{token: {fontSize: 14}}}>
-        <div className="flex grow flex-row justify-evenly">
-            <div>asd</div>
-            <LoginForm
-                size="small"
+    return(<>
+        <Modal open={copen} width={300} centered closeIcon={null} okText="确认" cancelText="取消" onOk={agreecb2} onCancel={denycb2} okButtonProps={{autoInsertSpace: false}} cancelButtonProps={{autoInsertSpace: false}}
+        footer={(_: React.ReactNode, {OkBtn, CancelBtn})=>{
+            return(<div className="flex flex-col items-center gap-2">
+                <div className="flex flex-row justify-center gap-4">
+                    <OkBtn />
+                    <CancelBtn />
+                </div>
+            </div>);
+        }}><div className="text-center">您已确认隐私条款，是否继续？</div></Modal>
+        <Modal width={900} closable={false} maskClosable={false} okText="同意" cancelText="不同意" onOk={agreecb} onCancel={denycb} okButtonProps={{autoInsertSpace: false}} open={open}
+        classNames={{
+            content: "h-192 overflow-y-auto scrollbar666",
+            mask: "backdrop-blur-sm"
+        }}
+        footer={(_: React.ReactNode, {OkBtn, CancelBtn})=>{
+            return(<div className="flex flex-col items-center gap-2">
+                <div className="text-sm text-neutral-600">点击“同意”即视为接受本声明全部内容，并承诺遵守平台规则及法律法规。</div>
+                <div className="flex flex-row justify-center gap-4">
+                    <OkBtn />
+                    <CancelBtn />
+                </div>
+            </div>);
+        }}><合规声明 /></Modal>
+        <ConfigProvider theme={{token: {fontSize: 14}}}><div className="flex grow flex-row justify-around">
+            <div>左主图</div>
+            <div className="flex flex-col justify-center"><div className="pb-32"><LoginForm
                 formRef={ref} onFinish={finish}
-                title={<h2>用户登录</h2>}
+                title={<h1>用户登录</h1>}
                 submitter={{
                     submitButtonProps: {
                         loading
@@ -96,13 +136,13 @@ export default function Login(props :Props){
                 }} />
                 <div className="flex flex-row gap-12 mb-1 select-none">
                     <ProFormCheckbox name="remember" valuePropName="checked">记住密码</ProFormCheckbox>
-                    <ProFormCheckbox name="agree" valuePropName="checked">我已阅读并同意 用户协议</ProFormCheckbox>
+                    <ProFormCheckbox name="agree" valuePropName="checked">我已阅读并同意 <button type="button" onClick={()=>{setOpen(true)}}>用户协议</button></ProFormCheckbox>
                 </div>
                 <div className="flex flex-row justify-between mb-2">
-                    <button className="cursor-pointer" onClick={()=>{nav(routes.reset)}}>忘记密码？</button>
-                    <div>还没有账号？<button className="cursor-pointer text-blue-500" onClick={()=>{nav(routes.register)}}>立即注册</button></div>
+                    <button type="button" onClick={()=>{nav(routes.reset)}}>忘记密码？</button>
+                    <div>还没有账号？<button type="button" className="text-blue-500" onClick={()=>{nav(routes.register)}}>立即注册</button></div>
                 </div>
-            </LoginForm>
-        </div>
-    </ConfigProvider>);
+            </LoginForm></div></div>
+        </div></ConfigProvider>
+    </>);
 }

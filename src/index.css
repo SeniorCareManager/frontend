@@ -23,6 +23,11 @@
     ol{
         list-style-type: decimal;
     }
+
+    a, button{
+        outline-color: var(--color-blue-500);
+        cursor: pointer;
+    }
 }
 
 .scrollbar666{

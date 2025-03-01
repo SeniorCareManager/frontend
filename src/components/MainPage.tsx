@@ -1,16 +1,8 @@
-﻿import { ConfigProvider } from "antd";
-import zhCN from "antd/locale/zh_CN";
-import Popup from "./Popup";
-import background from "../assets/background.jpg";
+﻿import background from "../assets/background.jpg";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function MainPage(){
     return(<div className="flex flex-col grow">
-        <ConfigProvider locale={zhCN} wave={{disabled: true}} theme={{token: {fontSize: 16}}}>
-            <div className="absolute top-0 left-0 flex grow flex-col flex-nowrap">
-                <Popup />
-            </div>
-        </ConfigProvider>
         <div className="flex flex-row p-8 h-170 relative before:content-[''] before:absolute before:top-0 before:left-0 before:h-170 before:w-full before:backdrop-blur-[4px]" style={{
             backgroundSize: "50.1% 100%, 50% auto",
             backgroundPosition: "left top, right 80%",
@@ -21,17 +13,17 @@ export default function MainPage(){
                 <h1 className="pb-8 text-[4rem] w-[9ic]">遇见银龄　智启未来</h1>
                 <div style={{fontSize: "2rem"}} className="mb-16">前瞻性一站式养老咨询与规划</div>
                 <div className="flex flex-row justify-center gap-16 mb-8">
-                    <button className="outline-blue-500 cursor-pointer rounded-[2px] bg-rose-500/50 h-36 w-40 text-2xl flex flex-col justify-center">
+                    <button className="duration-50 rounded-[2px] bg-rose-500/50 h-36 w-40 text-2xl flex flex-col justify-center hover:bg-rose-500/60 active:bg-rose-500/40">
                         <div aria-hidden className="flex flex-row justify-center m-3"><Icon icon="icon-park-outline:data-file" width="48" height="48" /></div>
                         <div>定制化服务</div>
                     </button>
-                    <button className="outline-blue-500 cursor-pointer rounded-[2px] bg-amber-600/50 h-36 w-40 text-2xl flex flex-col justify-center">
+                    <button className="duration-50 rounded-[2px] bg-amber-600/50 h-36 w-40 text-2xl flex flex-col justify-center hover:bg-amber-600/60 active:bg-amber-600/40">
                         <div aria-hidden className="flex flex-row justify-center m-3"><Icon icon="token:chat" width="48" height="48" /></div>
                         <div>咨询顾问</div>
                     </button>
                 </div>
                 <div className="flex flex-row justify-center">
-                    <button className="outline-blue-500 cursor-pointer flex flex-row gap-4">
+                    <button className="flex flex-row gap-4">
                         <h1 className="text-4xl p-6 rounded-[8rem/7rem] bg-yellow-400">养老方案制定</h1>
                         <div className="flex flex-row items-center mt-8">
                             <div className="text-2xl mr-2">立即填写问卷</div>

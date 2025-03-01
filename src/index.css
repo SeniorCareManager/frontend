@@ -28,10 +28,10 @@
         outline-color: var(--color-blue-500);
         cursor: pointer;
     }
-}
 
-.scrollbar666{
-    scrollbar-width: thin;
+    *{
+        scrollbar-width: thin;
+    }
 }
 
 .ant-modal .ant-modal-content{

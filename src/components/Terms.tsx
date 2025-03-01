@@ -1,6 +1,6 @@
 ﻿
 
-export default function 合规声明(){
+export default function Terms(){
     return(<div className="p-4">
         <h1 className="mb-4">合规声明</h1>
         <ol className="pl-4 *:py-2">

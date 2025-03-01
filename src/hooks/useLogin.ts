@@ -8,7 +8,7 @@ export function useLoginNav(){
     const nav = useNavigate();
     useEffect(()=>{
         if(!loggedIn){
-            messageApi!.error("您未登录，重定向至登录页面……");
+            messageApi!.error("您未登录或登录状态失效，请重新登录");
             nav(routes.login, {replace: true});
         }
     }, []);

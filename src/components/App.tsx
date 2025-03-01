@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useCallback, useState } from "react";
 import { HashRouter, Navigate, Route, Routes } from "react-router";
 import { MessageInstance } from "antd/es/message/interface";
 import useMessage from "antd/es/message/useMessage";
@@ -7,14 +7,16 @@ import { ConfigProvider } from "antd";
 
 import MainPage from "./MainPage";
 import Navbar from "./Navbar";
-import Login from "./Login";
-import Register from "./Register";
+import Login from "./account/Login";
+import Register from "./account/Register";
 import Feedback from "./Feedback";
 import Forum from "./Forum";
 import News from "./News";
 import Pricing from "./Pricing";
 import Plan from "./Plan";
-import ResetPassword from "./ResetPassword";
+import ResetPassword from "./account/ResetPassword";
+import Profile from "./profile/Profile";
+import localforage from "localforage";
 
 export const routes = {
     main: "/",
@@ -28,13 +30,16 @@ export const routes = {
 
     login: "/login",
     register: "/register",
-    
-    reset: "/reset"
+    reset: "/reset",
+
+    profile: "/profile",
+    profile_membership: "/profile/membership"
 } as const;
 
 const t = {
     loggedIn: false,
-    accessToken: ""
+    accessToken: "",
+    setLogin: null as unknown as (loggedIn? :boolean, accessToken? :string)=>void | null
 };
 
 export const LoginStatusContext = createContext(t);
@@ -44,7 +49,16 @@ export const MessageContext = createContext({
 
 export default function App(){
     const [messageApi, contextHolder] = useMessage({top: 64});
-    return(<LoginStatusContext.Provider value={t}>
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [at, setAT] = useState("");
+    const setLogin = useCallback((loggedIn? :boolean, accessToken? :string)=>{
+        if(loggedIn !== undefined) setLoggedIn(loggedIn);
+        if(accessToken !== undefined){
+            setAT(accessToken);
+            localforage.setItem("access_token", accessToken);
+        }
+    }, []);
+    return(<LoginStatusContext.Provider value={{loggedIn, accessToken: at, setLogin}}>
         <MessageContext.Provider value={{messageApi}}>
             <ConfigProvider locale={zhCN} wave={{disabled: true}} theme={{token: {fontSize: 16}}}>
                 {contextHolder}
@@ -56,10 +70,11 @@ export default function App(){
                         <Route path={routes.news} element={<News />} />
                         <Route path={routes.forum} element={<Forum />} />
                         <Route path={routes.pricing} element={<Pricing />} />
+                        <Route path={routes.feedback} element={<Feedback />} />
                         <Route path={routes.login} element={<Login />} />
                         <Route path={routes.register} element={<Register />} />
-                        <Route path={routes.feedback} element={<Feedback />} />
                         <Route path={routes.reset} element={<ResetPassword />} />
+                        <Route path={routes.profile} element={<Profile />} />
 
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>

@@ -2,7 +2,7 @@
 
 
 export default function Plan(){
-    const { accessToken, loggedIn } = useCheckLoginNav();
+    const { accessToken, loggedIn, initialzing, setLogin } = useCheckLoginNav();
     return(<div className="grow">
         plan
     </div>);

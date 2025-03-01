@@ -1,7 +1,10 @@
-﻿import background from "../assets/mp_bg.jpg";
+﻿import { useNavigate } from "react-router";
+import background from "../assets/mp_bg.jpg";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { routes } from "./App";
 
 export default function MainPage(){
+    const nav = useNavigate();
     return(<div className="flex flex-col grow">
         <div className="flex flex-row p-4 h-166 relative before:content-[''] before:absolute before:top-0 before:left-0 before:h-166 before:w-full before:backdrop-blur-[4px]" style={{
             backgroundSize: "50.1% 100%, 50% auto",
@@ -13,17 +16,23 @@ export default function MainPage(){
                 <h1 className="pb-8 text-[4rem] w-[9ic]">遇见银龄　智启未来</h1>
                 <div style={{fontSize: "2rem"}} className="mb-16">前瞻性一站式养老咨询与规划</div>
                 <div className="flex flex-row justify-center gap-16 mb-8">
-                    <button className="duration-50 rounded-[2px] bg-rose-500/50 h-36 w-40 text-2xl flex flex-col justify-center hover:bg-rose-500/60 active:bg-rose-500/40">
+                    <button className="duration-50 rounded-[2px] bg-rose-500/50 h-36 w-40 text-2xl flex flex-col justify-center hover:bg-rose-500/60 active:bg-rose-500/40" onClick={()=>{
+                        nav(routes.profile);
+                    }}>
                         <div aria-hidden className="flex flex-row justify-center m-3"><Icon icon="icon-park-outline:data-file" width="48" height="48" /></div>
                         <div>定制化服务</div>
                     </button>
-                    <button className="duration-50 rounded-[2px] bg-amber-600/50 h-36 w-40 text-2xl flex flex-col justify-center hover:bg-amber-600/60 active:bg-amber-600/40">
+                    <button className="duration-50 rounded-[2px] bg-amber-600/50 h-36 w-40 text-2xl flex flex-col justify-center hover:bg-amber-600/60 active:bg-amber-600/40" onClick={()=>{
+                        nav(routes.profile);
+                    }}>
                         <div aria-hidden className="flex flex-row justify-center m-3"><Icon icon="token:chat" width="48" height="48" /></div>
                         <div>咨询顾问</div>
                     </button>
                 </div>
                 <div className="flex flex-row justify-center">
-                    <button className="flex flex-row gap-4">
+                    <button className="flex flex-row gap-4" onClick={()=>{
+                        nav(routes.plan);
+                    }}>
                         <h1 className="text-4xl p-6 rounded-[8rem/7rem] bg-yellow-400">养老方案制定</h1>
                         <div className="flex flex-row items-center mt-8">
                             <div className="text-2xl mr-2">立即填写问卷</div>

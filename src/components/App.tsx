@@ -9,10 +9,8 @@ import MainPage from "./MainPage";
 import Navbar from "./Navbar";
 import Login from "./account/Login";
 import Register from "./account/Register";
-import Feedback from "./Feedback";
 import Forum from "./Forum";
 import News from "./News";
-import Pricing from "./Pricing";
 import Plan from "./Plan";
 import ResetPassword from "./account/ResetPassword";
 import Profile from "./profile/Profile";
@@ -25,9 +23,6 @@ export const routes = {
     plan: "/plan",
     news: "/news",
     forum: "/forum",
-    pricing: "/pricing",
-
-    feedback: "/feedback",
 
     login: "/login",
     register: "/register",
@@ -80,8 +75,6 @@ export default function App(){
                         <Route path={routes.plan} element={<Plan />} />
                         <Route path={routes.news} element={<News />} />
                         <Route path={routes.forum} element={<Forum />} />
-                        <Route path={routes.pricing} element={<Pricing />} />
-                        <Route path={routes.feedback} element={<Feedback />} />
 
                         <Route path={routes.login} element={<Login />} />
                         <Route path={routes.register} element={<Register />} />

@@ -78,7 +78,7 @@ export default function Login(){
             <div className="flex flex-col justify-center"><div className="pb-32"><LoginForm
                 formRef={ref} onFinish={finish}
                 title={<h1>用户登录</h1>}
-                submitter={{submitButtonProps: {loading: loading, autoInsertSpace: false, className: "!bg-[#e49939] hover:!bg-[#f79513] active:!bg-[#e3ad4b]"}}}
+                submitter={{submitButtonProps: {loading: loading, autoInsertSpace: false, className: "!bg-[#e49939] hover:!bg-[#f79513] active:!bg-[#e3ad4b] !text-black"}}}
             >
                 <div className="size-full mb-8"></div>
                 <ProFormText validateTrigger="onBlur" placeholder="手机号" name="phone"

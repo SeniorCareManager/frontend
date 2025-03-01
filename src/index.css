@@ -50,3 +50,19 @@
 .ant-btn-color-primary{
     box-shadow: none;
 }
+
+.nodrag{
+    -webkit-user-drag: none;
+}
+
+.ant-menu-light.ant-menu-root.ant-menu-vertical{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    border: none !important;
+}
+
+.ant-menu .ant-menu-item-divider{
+    border-top-width: .1875rem;
+    width: 90%;
+}

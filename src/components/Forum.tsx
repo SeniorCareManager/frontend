@@ -1,13 +1,17 @@
-﻿import { useContext, useEffect, useState } from "react";
+﻿import { useCallback, useContext, useEffect, useState } from "react";
 import { useCheckLoginNav } from "../hooks/useCheckLoginNav";
 import meta from "../meta";
 import { MessageContext } from "./App";
 import { ForumLoginResponse } from "../schema/forumLogin";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 export default function Forum(){
     const { accessToken, loggedIn, initialzing, setLogin } = useCheckLoginNav();
     const { messageApi } = useContext(MessageContext);
     const [src, setSrc] = useState("");
+    const [loading, setLoading] = useState(true);
+    const load = useCallback(()=>setLoading(false), []);
     useEffect(()=>{(async()=>{
         if(!initialzing){
             const response = fetch(`${meta.apiDomain}/v1/status/getForumToken`, {
@@ -24,8 +28,13 @@ export default function Forum(){
             else messageApi!.error("登录论坛时出现错误！");
         }
     })()}, [initialzing]);
-    return(<div className="grow">
-        <iframe seamless className="h-full w-full" src={src}>
-        </iframe>
+    return(<div className="grow flex flex-col justify-center">
+        {loading ?
+        <div className="flex flex-col items-center gap-8 mb-32">
+            <Spin indicator={<LoadingOutlined style={{fontSize: 64}} spin />} />
+            <div>加载中……</div>
+        </div>
+        : null}
+        <iframe hidden={loading} className="h-full w-full" scrolling="no" src={src} onLoad={load} />
     </div>);
 }

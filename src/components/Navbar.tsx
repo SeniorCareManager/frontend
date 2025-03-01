@@ -1,11 +1,16 @@
-﻿import { Link, NavLink } from "react-router";
+﻿import { Link, NavLink, useLocation } from "react-router";
 import blackLogo from "../assets/black.png";
 import { LoginStatusContext, routes } from "./App";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function Navbar(){
     const { loggedIn } = useContext(LoginStatusContext);
-    return(<div className="flex flex-row justify-center bg-[#f9e1aa] border-rose-600 border-b-2 h-16 select-none px-4 sticky">
+    const [border, setBorder] = useState(false);
+    const location1 = useLocation();
+    useEffect(()=>{
+        setBorder(location.hash === "#/forum");
+    }, [location1]);
+    return(<div className="flex flex-row justify-center bg-[#f9e1aa] border-b-2 h-16 select-none px-4 sticky" style={{borderColor: border ? "#f9e1aa" : "var(--color-rose-600)"}}>
         <div className="flex flex-row max-w-5xl w-5xl justify-around">
             <Link to="/" className="flex flex-row flex-nowrap justify-center items-center flex-none m-2" style={{clipPath: "margin-box"}}>
                 <img alt="银龄财富规划 Logo" src={blackLogo} width={90} className="outline-none mr-[-10px]" />

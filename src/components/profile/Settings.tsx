@@ -1,8 +1,8 @@
-﻿import { Button, Input, Modal, Switch, Upload } from "antd";
+﻿import { Button, GetProp, Input, Modal, Switch, Upload } from "antd";
 import { UserData } from "../../schema/user";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { useCallback, useContext, useState } from "react";
-import { RcFile, UploadChangeParam, UploadFile } from "antd/es/upload";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { RcFile, UploadChangeParam, UploadFile, UploadProps } from "antd/es/upload";
 import { LoginStatusContext, MessageContext, routes } from "../App";
 import meta from "../../meta";
 import { useNavigate } from "react-router";
@@ -11,6 +11,24 @@ export default function Settings({ user } :{user :UserData}){
     const { messageApi } = useContext(MessageContext);
     const nav = useNavigate();
     const { accessToken, initialzing, setLogin } = useContext(LoginStatusContext);
+    const [avatarFile, setAvatarFile] = useState<UploadFile | null>(null);
+    useEffect(()=>{(async()=>{
+        if(avatarFile){
+            const formData = new FormData();
+            formData.append("file", avatarFile as RcFile);
+            const response = fetch(`${meta.apiDomain}/v1/user/avatar`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${accessToken}`
+                },
+                body: formData
+            });
+            response.catch(e=>console.log(e));
+            const data = await (await response).json();
+            console.log(data);
+        }
+    })()}, [avatarFile]);
     const beforeAvatarCCB = useCallback((file :RcFile)=>{
         if(file.type !== "image/jpeg" && file.type !== "image/png"){
             messageApi!.error("只能上传JPG或PNG格式的图片！");
@@ -20,10 +38,12 @@ export default function Settings({ user } :{user :UserData}){
             messageApi!.error("图片大小不能大于2MB！");
             return false;
         }
-        return true;
+        setAvatarFile(file);
+        return false;
     }, []);
     const [avatarU, setAvatarU] = useState(false);
     const avatarCCB = useCallback((info :UploadChangeParam<UploadFile<any>>)=>{
+        console.log(info);
         if(info.file.status === "uploading") setAvatarU(true);
         else if(info.file.status === "done"){
             messageApi!.success("修改头像成功");

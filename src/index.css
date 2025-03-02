@@ -35,6 +35,13 @@
     }
 }
 
+html{
+    overflow-x: auto;
+    overflow-y: clip;
+    width: 100vw;
+    height: 100vh;
+}
+
 .ant-modal .ant-modal-content{
     padding-right: 5px;
 }

@@ -10,7 +10,6 @@ type FieldType = {
 
 export default function ResetPassword(){
     const [getVer, setGetVer] = useState(-1);
-
     return(<div className="grow flex flex-row justify-center" style={{
         backgroundSize: "100% 100%",
         backgroundPosition: "left top",

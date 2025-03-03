@@ -30,9 +30,11 @@ export default function Forum(){
     })()}, [initialzing]);
     return(<div className="grow flex flex-col justify-center">
         {loading ?
-        <div className="flex flex-col items-center gap-8 mb-32">
-            <Spin indicator={<LoadingOutlined style={{fontSize: 64}} spin />} />
-            <div>加载中……</div>
+        <div className="flex flex-col items-center mb-32">
+            <Spin indicator={<LoadingOutlined style={{fontSize: 64}} className="mb-16" spin />} />
+            <div className="mb-4">加载中……</div>
+            <div><b>请调整浏览器设置，允许第三方 Cookie，</b></div>
+            <div><b>以自动登录论坛系统。</b></div>
         </div>
         : null}
         <iframe hidden={loading} className="h-full w-full" scrolling="no" src={src} onLoad={load} />

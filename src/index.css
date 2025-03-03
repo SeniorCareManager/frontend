@@ -73,3 +73,11 @@ html{
     border-top-width: .1875rem;
     width: 90%;
 }
+
+.ant-steps-item{
+    padding: .3rem 0;
+}
+
+.ant-steps.ant-steps-vertical >.ant-steps-item>.ant-steps-item-container>.ant-steps-item-tail::after{
+    height: calc(100% + .6rem);
+}

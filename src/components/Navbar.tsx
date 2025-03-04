@@ -2,6 +2,7 @@
 import blackLogo from "../assets/black.png";
 import { LoginStatusContext, routes } from "./App";
 import { useContext, useEffect, useState } from "react";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function Navbar(){
     const { loggedIn } = useContext(LoginStatusContext);
@@ -33,7 +34,10 @@ export default function Navbar(){
                     duration-75 rounded-xl px-4 py-2 bg-orange-400/20 hover:bg-rose-300/90 active:bg-rose-300/60">登录</Link>
                 </div></>}
                 <div className="flex flex-col justify-center">
-                    <Link to={routes.profile} className="duration-75 rounded-xl px-4 py-2 bg-yellow-400/30 hover:bg-yellow-300/80 active:bg-yellow-300/50">开通会员</Link>
+                    <Link to={routes.profile} className="inline-flex flex-row duration-75 rounded-xl px-3 py-2 bg-yellow-400/30 hover:bg-yellow-300/80 active:bg-yellow-300/50">
+                        <span className="inline-flex flex-col justify-center"><Icon icon="tabler:crown" width="20" height="20" /></span>
+                        <span>开通会员</span>
+                    </Link>
                 </div>
             </div>
         </div>

@@ -20,6 +20,11 @@
         font-size: x-large;
         font-weight: bold;
     }
+
+    h3{
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
     
     ol{
         list-style-type: decimal;

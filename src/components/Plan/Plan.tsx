@@ -6,6 +6,7 @@ import { Questionnaire } from "./Questionnaire";
 import PlanNotice from "./PlanNotice";
 import ProfileWatch from "./ProfileWatch";
 import Report from "./Report";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const items :StepProps[] = [
     {
@@ -49,14 +50,22 @@ export default function Plan(){
                     : null
                     }
                 </div>
-                <div className="flex flex-col justify-center px-16 py-4 text-4xl text-[#ff9800]" style={{
-                    writingMode: "vertical-lr",
-                    fontFamily: "huawenxingkai, sans-serif",
-                    lineHeight: "3rem",
-                    letterSpacing: ".3rem"
-                }}>
-                    <div className="mt-16">银龄财富蓝图</div>
-                    <div className="mt-32">从一张问卷开始</div>
+                <div className="flex flex-col px-2">
+                    {currentStep === 2 ?
+                    <div className="mt-40 flex flex-col gap-2">
+                        <h3>报告需要进一步解读？</h3>
+                        <button className="flex flex-row items-center gap-2 w-fit cursor-pointer p-2 rounded-xl text-lg duration-150 bg-rose-500/50 hover:bg-rose-500/60 active:bg-rose-500/40">一键咨询<Icon icon="lets-icons:comment" width="24" height="24" /></button>
+                        <button className="flex flex-row items-center gap-2 w-fit cursor-pointer px-4 py-2 rounded-xl text-lg duration-150 bg-amber-500/50 hover:bg-amber-500/60 active:bg-amber-500/40">预约咨询</button>
+                    </div>
+                    : <div className="text-4xl self-center text-[#ff9800]" style={{
+                        writingMode: "vertical-lr",
+                        fontFamily: "huawenxingkai, sans-serif",
+                        lineHeight: "3rem",
+                        letterSpacing: ".3rem"
+                    }}>
+                        <div className="mt-32">银龄财富蓝图</div>
+                        <div className="mt-48">从一张问卷开始</div>
+                    </div>}
                 </div>
             </>:
             <div className="flex flex-col items-center h-full">

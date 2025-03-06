@@ -2,6 +2,9 @@
 import { GetNewsDetailResponse, GetNewsResponse, News1 } from "../schema/news";
 import meta from "../meta";
 import { MessageContext } from "./App";
+import picture1 from "../assets/图片1.png";
+import picture2 from "../assets/图片2.png";
+import picture4 from "../assets/图片4.png";
 
 const newsType = {
     "01": "法律法规",
@@ -44,11 +47,17 @@ export default function News(){
                 <div dangerouslySetInnerHTML={{__html: currentNews.content}} />
             </div>:<>
                 <h1>每日政策关注提示</h1>
-                <div className="mt-12 flex flex-col gap-4">
-                    {newsList.map(value=><div key={value.news_id} className="flex flex-row items-center gap-3">
-                        <div className="text-sm text-neutral-500">{value.time.replace(" 00:00:00", "")}</div>
-                        <div><button className="underline underline-offset-3" onClick={()=>getNews(value.news_id)}>{value.title}</button></div>
-                    </div>)}
+                <div className="mt-8 flex flex-row justify-center gap-8 w-full">
+                    <div className="flex flex-col w-64 gap-4">
+                        <img src={picture1} className="w-full nodrag" />
+                        <img src={picture2} className="w-full nodrag" />
+                    </div>
+                    <div className="flex flex-col gap-4">
+                        {newsList.map(value=><div key={value.news_id} className="flex flex-row items-center gap-3">
+                            <div className="shrink-0 text-sm text-neutral-500">{value.time.replace(" 00:00:00", "")}</div>
+                            <div className="grow"><button className="underline underline-offset-3 text-left" onClick={()=>getNews(value.news_id)}>{value.title}</button></div>
+                        </div>)}
+                    </div>
                 </div>
             </>
             }
@@ -60,6 +69,7 @@ export default function News(){
                 <External title="中国老龄协会-老龄事业" link="https://www.cncaprc.gov.cn" />
                 <External title="中国老龄协会-政策法规" link="https://www.cncaprc.gov.cn/zcfg/index.jhtml" />
             </div>
+            <div className="mt-8 w-64"><img src={picture4} className="w-full nodrag" /></div>
         </div>
     </div>);
 }

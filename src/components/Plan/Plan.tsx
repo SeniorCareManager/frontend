@@ -1,9 +1,11 @@
-﻿import { useCheckLoginNav } from "../hooks/useCheckLoginNav";
-import background from "../assets/general3.png";
-import { Button, ConfigProvider, StepProps, Steps, theme } from "antd";
+﻿import { useCheckLoginNav } from "../../hooks/useCheckLoginNav";
+import background from "../../assets/general3.png";
+import { ConfigProvider, StepProps, Steps, theme } from "antd";
 import { useState } from "react";
 import { Questionnaire } from "./Questionnaire";
 import PlanNotice from "./PlanNotice";
+import ProfileWatch from "./ProfileWatch";
+import Report from "./Report";
 
 const items :StepProps[] = [
     {
@@ -29,7 +31,7 @@ export default function Plan(){
         {
             currentStep >= 0 ? 
             <>
-                <div className="flex flex-col w-60 py-16 pl-2"><ConfigProvider theme={{components: {Steps: {fontSize: 24, fontSizeLG: 20, iconSize: 32}}}}>
+                <div className="flex flex-col w-60 py-16 pl-2"><ConfigProvider theme={{components: {Steps: {fontSize: 20, fontSizeLG: 20, iconSize: 36}}}}>
                     <h1 className="mb-6 text-2xl">定制方案流程</h1>
                     <Steps
                         direction="vertical"
@@ -37,10 +39,24 @@ export default function Plan(){
                         items={items}
                     />
                 </ConfigProvider></div>
-                <div className="w-160"><Questionnaire /></div>
-                <div className="flex flex-col justify-center px-16 py-2" style={{writingMode: "vertical-lr"}}>
-                    <h1 className="mt-16">银龄财富蓝图</h1>
-                    <h1 className="mt-32">从一张问卷开始</h1>
+                <div className="w-160">
+                    {currentStep === 0 ?
+                    <Questionnaire advanceTo1={()=>setCurrentStep(1)} />
+                    : currentStep === 1 ?
+                    <ProfileWatch advanceTo2={()=>setCurrentStep(2)} />
+                    : currentStep === 2 ?
+                    <Report />
+                    : null
+                    }
+                </div>
+                <div className="flex flex-col justify-center px-16 py-4 text-4xl text-[#ff9800]" style={{
+                    writingMode: "vertical-lr",
+                    fontFamily: "huawenxingkai, sans-serif",
+                    lineHeight: "3rem",
+                    letterSpacing: ".3rem"
+                }}>
+                    <div className="mt-16">银龄财富蓝图</div>
+                    <div className="mt-32">从一张问卷开始</div>
                 </div>
             </>:
             <div className="flex flex-col items-center h-full">

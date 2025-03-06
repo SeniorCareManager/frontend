@@ -11,7 +11,7 @@ import Login from "./account/Login";
 import Register from "./account/Register";
 import Forum from "./Forum";
 import News from "./News";
-import Plan from "./Plan";
+import Plan from "./Plan/Plan";
 import ResetPassword from "./account/ResetPassword";
 import Profile from "./profile/Profile";
 import localforage from "localforage";

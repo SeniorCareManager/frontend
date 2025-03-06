@@ -13,8 +13,8 @@ export default function MainPage(){
             backgroundImage: `linear-gradient(to right, #f7f7f7, #fbbd36), url(${background})`
         }}>
             <div className="text-center m-4 py-4 z-1 rounded-sm">
-                <h1 className="pb-8 text-[4rem] w-[9ic]">遇见银龄　智启未来</h1>
-                <div style={{fontSize: "2rem"}} className="mb-16">前瞻性一站式养老咨询与规划</div>
+                <div className="pb-8 text-[5rem]" style={{fontFamily: "huawenxingkai, sans-serif"}}>遇见银龄　智启未来</div>
+                <div style={{fontSize: "2.5rem", fontFamily: "huawenxingkai, sans-serif"}} className="mb-16">前瞻性一站式养老咨询与规划</div>
                 <div className="flex flex-row justify-center gap-16 mb-8">
                     <button className="duration-50 rounded-[2px] bg-rose-500/50 h-36 w-40 text-2xl flex flex-col justify-center hover:bg-rose-500/60 active:bg-rose-500/40" onClick={()=>{
                         nav(routes.profile);

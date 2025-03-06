@@ -35,6 +35,13 @@
     }
 }
 
+@font-face {
+    font-family: "huawenxingkai";
+    src: url("./assets/huawenxingkai.woff2") format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html{
     overflow-x: auto;
     overflow-y: clip;

@@ -13,16 +13,16 @@ export default function MainPage(){
             backgroundImage: `linear-gradient(to right, #f7f7f7, #fbbd36), url(${background})`
         }}>
             <div className="text-center m-4 py-4 z-1 rounded-sm">
-                <div className="pb-8 text-[5rem]" style={{fontFamily: "huawenxingkai, sans-serif"}}>遇见银龄　智启未来</div>
-                <div style={{fontSize: "2.5rem", fontFamily: "huawenxingkai, sans-serif"}} className="mb-16">前瞻性一站式养老咨询与规划</div>
+                <h1 className="pb-8 text-6xl">遇见银龄　智启未来</h1>
+                <div className="mt-4 mb-16 text-2xl">前瞻性一站式养老咨询与规划</div>
                 <div className="flex flex-row justify-center gap-16 mb-8">
-                    <button className="duration-50 rounded-[2px] bg-rose-500/50 h-36 w-40 text-2xl flex flex-col justify-center hover:bg-rose-500/60 active:bg-rose-500/40" onClick={()=>{
+                    <button className="duration-50 rounded-[2px] h-36 w-40 text-2xl flex flex-col justify-center bg-amber-600/50 hover:bg-amber-600/60 active:bg-amber-600/40" onClick={()=>{
                         nav(routes.profile);
                     }}>
                         <div aria-hidden className="flex flex-row justify-center m-3"><Icon icon="icon-park-outline:data-file" width="48" height="48" /></div>
                         <div>定制化服务</div>
                     </button>
-                    <button className="duration-50 rounded-[2px] bg-amber-600/50 h-36 w-40 text-2xl flex flex-col justify-center hover:bg-amber-600/60 active:bg-amber-600/40" onClick={()=>{
+                    <button className="duration-50 rounded-[2px] h-36 w-40 text-2xl flex flex-col justify-center bg-amber-600/50 hover:bg-amber-600/60 active:bg-amber-600/40" onClick={()=>{
                         nav(routes.profile);
                     }}>
                         <div aria-hidden className="flex flex-row justify-center m-3"><Icon icon="token:chat" width="48" height="48" /></div>

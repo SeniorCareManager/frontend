@@ -55,7 +55,7 @@ export default function News(){
                     <div className="flex flex-col gap-4">
                         {newsList.map(value=><div key={value.news_id} className="flex flex-row items-center gap-3">
                             <div className="shrink-0 text-sm text-neutral-500">{value.time.replace(" 00:00:00", "")}</div>
-                            <div className="grow"><button className="underline underline-offset-3 text-left" onClick={()=>getNews(value.news_id)}>{value.title}</button></div>
+                            <div className="grow"><button className="cursor-auto text-left">{value.title}</button></div>
                         </div>)}
                     </div>
                 </div>

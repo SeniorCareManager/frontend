@@ -47,7 +47,29 @@ export default function News(){
                 <div dangerouslySetInnerHTML={{__html: currentNews.content}} />
             </div>:<>
                 <h1>每日政策关注提示</h1>
-                <div className="mt-8 flex flex-row justify-center gap-8 w-full">
+                <div className="text-2xl w-full mt-4">平台：全国养老服务信息平台</div>
+                <div className="text-2xl w-full mt-4">类型：政策文件</div>
+                <div className="flex flex-row w-full gap-4 mt-4">
+                    <div className="h-full grow-6 shrink-1 basis-[50%] overflow-y-clip">
+                        <div className="my-4">可能感兴趣的内容➡️</div>
+                        <img src={picture2} className="size-full nodrag" />
+                    </div>
+                    <div className="grow-1 shrink-1 basis-[50%]">
+                        <div className="mt-2 text-2xl">养老金融</div>
+                        <div className="mt-2">发展养老金融，支持养老设施建设，推广商业健康保险。</div>
+                        <div className="mt-2 text-2xl">养老服务补贴</div>
+                        <div className="mt-2">完善补贴政策，推进异地结算，支持普惠养老服务。</div>
+                        <div className="mt-2 text-2xl">老年教育和就业</div>
+                        <div className="mt-2">开展老年教育，开发适合老年人的就业岗位。</div>
+                        <div className="mt-2 text-2xl">居家养老</div>
+                        <div className="mt-2 text-2xl">社区养老</div>
+                        <div className="mt-2 text-2xl">机构养老</div>
+                        <div className="mt-2">完善家庭养老支持政策，建设家庭养老床位，提供助餐、助浴等上门服务。发展嵌入式社区养老，增加活动场所，提供日间照料和上门服务。优化机构养老，增加护理型床位，满足失能老人需求。</div>
+                        <div className="mt-2 text-2xl">医养结合</div>
+                        <div className="mt-2">强化医疗与养老结合，简化转诊程序，发展安宁疗护。</div>
+                    </div>
+                </div>
+                {/*<div className="mt-8 flex flex-row justify-center gap-8 w-full">
                     <div className="flex flex-col w-64 gap-4">
                         <img src={picture1} className="w-full nodrag" />
                         <img src={picture2} className="w-full nodrag" />
@@ -58,7 +80,7 @@ export default function News(){
                             <div className="grow"><button className="cursor-auto text-left">{value.title}</button></div>
                         </div>)}
                     </div>
-                </div>
+                </div>*/}
             </>
             }
         </div>
@@ -66,8 +88,7 @@ export default function News(){
             <h1 className="mb-8">权威平台　一键跳转</h1>
             <div className="flex flex-col gap-4">
                 <External title="全国养老服务信息平台-政策咨询" link="https://yanglao.mca.gov.cn/#/homePage" />
-                <External title="中国老龄协会-老龄事业" link="https://www.cncaprc.gov.cn" />
-                <External title="中国老龄协会-政策法规" link="https://www.cncaprc.gov.cn/zcfg/index.jhtml" />
+                <External title="中国政府网-老龄健康司" link="http://www.nhc.gov.cn/lljks/new_index.shtml" />
             </div>
             <div className="mt-8 w-64"><img src={picture4} className="w-full nodrag" /></div>
         </div>

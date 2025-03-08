@@ -31,7 +31,7 @@ export default function News(){
         if(!message.success) messageApi!.error(message.message as unknown as string);
         else setCurrentNews(message.message);
     }, []);
-    return(<div className="grow bg-[#f5f1ef] flex flex-row p-4 gap-2">
+    return(<div className="grow bg-[#f5f1ef] flex flex-col p-4 gap-2">
         <div className="grow flex flex-col p-4 items-center border-2 border-black">
             {currentNews ?
             <div>
@@ -84,13 +84,9 @@ export default function News(){
             </>
             }
         </div>
-        <div className="flex flex-col p-4 border-2 border-black">
-            <h1 className="mb-8">权威平台　一键跳转</h1>
-            <div className="flex flex-col gap-4">
-                <External title="全国养老服务信息平台-政策咨询" link="https://yanglao.mca.gov.cn/#/homePage" />
-                <External title="中国政府网-老龄健康司" link="http://www.nhc.gov.cn/lljks/new_index.shtml" />
-            </div>
-            <div className="mt-8 w-64"><img src={picture4} className="w-full nodrag" /></div>
+        <div className="flex flex-row justify-evenly p-4 bg-[#faf7f2]">
+            <External title="全国养老服务信息平台-政策咨询" link="https://yanglao.mca.gov.cn/#/homePage" />
+            <External title="中国政府网-老龄健康司" link="http://www.nhc.gov.cn/lljks/new_index.shtml" />
         </div>
     </div>);
 }
